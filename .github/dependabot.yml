@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "rffontenelle"
+      - "NyaPuma"
     commit-message:
       prefix: "gha"
 
@@ -14,6 +14,6 @@ updates:
     schedule:
       interval: "weekly"
     assignees:
-      - "rffontenelle"
+      - "NyaPuma"
     commit-message:
       prefix: "pip"
