@@ -1,0 +1,24 @@
+name: Lint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FORCE_COLOR: 1
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5.0.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6.0.0
+        with:
+          python-version: "3.x"
+      - uses: tox-dev/action-pre-commit-uv@v1
