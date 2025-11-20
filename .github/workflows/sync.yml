@@ -30,10 +30,10 @@ jobs:
       # 1- Set up environment
       - name: Check out this repository (workflow scripts)
         uses: actions/checkout@v5
-        # NOTA: O primeiro checkout obtém os scripts (stats.py, potodo.sh, etc.)
+        # O primeiro checkout obtém os scripts (stats.py, potodo.sh, etc.)
 
-      - name: ⚙️ Set execution permissions for scripts 
-        # Este passo adiciona a permissão de execução (chmod +x) aos scripts
+      - name: ⚙️ Set execution permissions for scripts
+        # CORREÇÃO: Adicionar permissão de execução (+x) para resolver o erro 126.
         run: |
           chmod +x scripts/stats.py
           chmod +x scripts/potodo.sh
@@ -92,7 +92,10 @@ jobs:
         if: inputs.tx_project != 'python-newest' # python-newest doesn't have a newer branch
         run: |
           newer_branch=${PYDOC_VERSION%%.*}.$((${PYDOC_VERSION##*.}+1))
-          git clone --depth 1 --single-branch --branch $newer_branch https://github.com/python/python-docs-pt-pt ${newer_branch}-dir
+          # CORREÇÃO: Usar o GITHUB_TOKEN para autenticar o clone e evitar o erro 128 (fatal: could not read Username).
+          git clone --depth 1 --single-branch --branch $newer_branch \
+            https://x-access-token:${{ github.token }}@github.com/python/python-docs-pt-pt \
+            ${newer_branch}-dir
           pomerge --from ./${newer_branch}-dir/{**/,}*.po --to ./${{ env.PYDOC_LANG_DIR }}/{**/,}*.po
           rm -rf ./${newer_branch}-dir
 
