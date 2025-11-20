@@ -28,20 +28,27 @@ jobs:
     steps:
 
       # 1- Set up environment
-
-      - name: Check out this repository
+      - name: Check out this repository (workflow scripts)
         uses: actions/checkout@v5
+        # NOTA: O primeiro checkout obtém os scripts (stats.py, potodo.sh, etc.)
+
+      - name: ⚙️ Set execution permissions for scripts 
+        # Este passo adiciona a permissão de execução (chmod +x) aos scripts
+        run: |
+          chmod +x scripts/stats.py
+          chmod +x scripts/potodo.sh
+          chmod +x scripts/pull_translations.sh
+          chmod +x scripts/commit.sh
 
       - name: Set language dir variable
-        run:
-          echo "PYDOC_LANG_DIR=${{ env.PYDOC_VERSION }}" >> $GITHUB_ENV
+        run: echo "PYDOC_LANG_DIR=${{ env.PYDOC_VERSION }}" >> $GITHUB_ENV
 
-      - name: Checkout this repository ${{ env.PYDOC_VERSION }}
+      - name: Checkout Python docs repository branch ${{ env.PYDOC_VERSION }}
         uses: actions/checkout@v5
         with:
           ref: ${{ env.PYDOC_VERSION }}
           path: ${{ env.PYDOC_LANG_DIR }}
-
+          
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ inputs.version }}
