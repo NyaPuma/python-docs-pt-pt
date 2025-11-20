@@ -63,6 +63,10 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+          # 2.1 - Garantir permissão de execução aos scripts
+      - name: Dar permissão a todos os scripts
+        run: chmod +x ./scripts/*.sh ./scripts/*.py
+
       # 3- Pull translations
 
       - name: Generate updated .tx/config
