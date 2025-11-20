@@ -1,30 +1,22 @@
-#!/bin/sh
-# Push source strings to Transifex
+#!/bin/bash
 
-TX_PROJECT=${1:-python-newest}
+set -u
 
-[ -n "$CI" ] && set -x
-set -e
+cd cpython || exit 1
 
-ROOTDIR=$(realpath "$(dirname $0)/..")
+# Restore git timestamp for enabling build cache
+rev=HEAD
+for f in $(git ls-tree -r -t --full-name --name-only "$rev" Doc) ; do
+    touch -d $(git log --pretty=format:%cI -1 "$rev" -- "$f") "$f";
+done
 
-cd "${ROOTDIR}"
+cd ..
+cd docs || exit 1
 
-if ! test -f cpython/Doc/conf.py; then
-  echo "Unable to find proper CPython Doc directory."
-  exit 1
-fi
+# Restore git timestamp for enabling build cache
+rev=HEAD
+for f in $(git ls-tree -r -t --full-name --name-only "$rev") ; do
+    touch -d $(git log --pretty=format:%cI -1 "$rev" -- "$f") "$f";
+done
 
-# Create POT Files
-cd cpython/Doc
-sphinx-build -b gettext -D gettext_compact=0 . locales/pot
-
-# Generate Transifex configuration file (.tx/config)
-cd locales
-sphinx-intl create-txconfig
-sphinx-intl update-txconfig-resources -p pot -d . --transifex-organization-name python-doc --transifex-project-name "$TX_PROJECT"
-sed -i '/^minimum_perc *= 0$/s/0/1/' .tx/config
-
-if [ "$CI" = true ]; then
-    tx push --source --skip
-fi
+$(realpath ../tx) pull --languages "$LOCALE" -t --use-git-timestamps --workers 25 --silent
