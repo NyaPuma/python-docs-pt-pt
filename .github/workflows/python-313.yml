@@ -1,0 +1,29 @@
+name: python-313
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 23 * * *'
+  pull_request:
+    branches:
+      - main
+      - '3.13'
+  push:
+    branches:
+      - main
+      - '3.13'
+
+jobs:
+  sync:
+    uses: ./.github/workflows/sync.yml
+    with:
+      tx_project: ${{ github.workflow }}
+      version: 3.13
+    secrets: inherit
+  check:
+    uses: ./.github/workflows/check.yml
+    needs: sync
+    with:
+      tx_project: ${{ github.workflow }}
+      version: 3.13
+    secrets: inherit

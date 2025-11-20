@@ -1,0 +1,29 @@
+name: python-314
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *'
+  pull_request:
+    branches:
+      - main
+      - '3.14'
+  push:
+    branches:
+      - main
+      - '3.14'
+
+jobs:
+  sync:
+    uses: ./.github/workflows/sync.yml
+    with:
+      tx_project: python-newest
+      version: 3.14
+    secrets: inherit
+  check:
+    uses: ./.github/workflows/check.yml
+    needs: sync
+    with:
+      tx_project: python-newest
+      version: 3.14
+    secrets: inherit
