@@ -23,13 +23,7 @@ on:
         description: "Name of the Transifex translation project"
         required: true
         type: string
-    secrets:
-      TELEGRAM_TOKEN:
-        description: "Token required for interacting with Telegram API"
-        required: false
-      TELEGRAM_TO:
-        description: "Account ID that will receive the telegram notification"
-        required: false
+    # Segredos relacionados ao Telegram foram removidos
 
 permissions:
   contents: read
@@ -43,7 +37,7 @@ jobs:
 
   # Build documentation handling warnings as errors in both HTML and PDF.
   # If success, upload built docs as artifact.
-  # If failure in HTML, notify telegram and upload logs.
+  # If failure in HTML, upload logs.
   build:
     name: Build docs
     runs-on: ubuntu-latest
@@ -87,16 +81,7 @@ jobs:
         # Agora o scripts/build.sh será executado sem erro de permissão
         run: ./scripts/build.sh ${{ matrix.format }}
 
-      - name: Prepare notification (only on error)
-        if: always() && steps.build.outcome == 'failure' && matrix.format == 'html'
-        id: prepare
-        run: |
-          # Agora o scripts/prepmsg.sh será executado sem erro de permissão
-          scripts/prepmsg.sh logs/sphinxwarnings-${{ matrix.format }}.txt logs/notify.txt
-          cat logs/notify.txt
-        env:
-          GITHUB_JOB: ${{ github.job }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
+      # O passo 'Prepare notification' foi removido
 
       - name: Upload artifact - log files
         if: always() && steps.build.outcome == 'failure'
@@ -133,7 +118,7 @@ jobs:
           path: ./*.pdf
 
   # Run sphinx-lint to find wrong reST syntax in PO files. Always store logs.
-  # If issues are found, notify telegram and upload logs.
+  # If issues are found, upload logs.
   lint:
     name: Lint translations
     runs-on: ubuntu-latest
@@ -173,16 +158,7 @@ jobs:
         # Agora o scripts/lint.sh será executado sem erro de permissão
         run: ./scripts/lint.sh
 
-      - name: Prepare notification (only on error)
-        if: always() && steps.lint.outcome == 'failure'
-        id: prepare
-        run: |
-          # Agora o scripts/prepmsg.sh será executado sem erro de permissão
-          scripts/prepmsg.sh logs/sphinxlint.txt logs/notify.txt
-          cat logs/notify.txt
-        env:
-          GITHUB_JOB: ${{ github.job }}
-          GITHUB_RUN_ID: ${{ github.run_id }}
+      # O passo 'Prepare notification' foi removido
 
       - name: Upload artifact - log files
         if: always() && steps.lint.outcome == 'failure'
@@ -211,7 +187,7 @@ jobs:
         run: |
           sed -i 's/\xe2\x80\x8b//g' *.po **/*.po
           # Undo removal from where we should not
-          sed -i 's|`````|``\xe2\x80\x8b`\xe2\x80\x8b``|' reference/lexical_analysis.po # Corrigi a linha sed de undo para garantir a remoção correta
+          sed -i 's|`````|``\xe2\x80\x8b`\xe2\x80\x8b``|' reference/lexical_analysis.po
 
       - name: Show difference (error if there is any)
         run: |
