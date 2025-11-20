@@ -1,0 +1,194 @@
+# Run some tests in the Python Doc translations
+
+name: Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Branch name corresponding to a Python version"
+        required: true
+        type: string
+      tx_project:
+        description: "Name of the Transifex translation project"
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      version:
+        description: "Branch name corresponding to a Python version"
+        required: true
+        type: string
+      tx_project:
+        description: "Name of the Transifex translation project"
+        required: true
+        type: string
+    secrets:
+      TELEGRAM_TOKEN:
+        description: "Token required for interacting with Telegram API"
+        required: false
+      TELEGRAM_TO:
+        description: "Account ID that will receive the telegram notification"
+        required: false
+
+permissions:
+  contents: read
+
+env:
+  PYDOC_LANGUAGE: pt_PT
+  PYDOC_REPO: ${{ github.server_url }}/${{ github.repository }}
+  PYDOC_VERSION: ${{ inputs.version }}
+
+jobs:
+
+  # Build documentation handling warnings as errors in both HTML and PDF.
+  # If success, upload built docs as artifact.
+  # If failure in HTML, notify telegram and upload logs.
+  build:
+    name: Build docs
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        format: [ html, latex, epub ]
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 5
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.version }}
+          cache: pip
+          allow-prereleases: true
+
+      - name: Make sure the repository is up to date
+        if: github.event_name != 'pull_request'
+        run: git pull --rebase
+
+      - name: setup
+        run: ./scripts/setup.sh
+
+      - name: Add problem matcher
+        uses: sphinx-doc/github-problem-matcher@v1.1
+
+      - name: Build docs
+        id: build
+        run: ./scripts/build.sh ${{ matrix.format }}
+
+      - name: Prepare notification (only on error)
+        if: always() && steps.build.outcome == 'failure' && matrix.format == 'html'
+        id: prepare
+        run: |
+          scripts/prepmsg.sh logs/sphinxwarnings-${{ matrix.format }}.txt logs/notify.txt
+          cat logs/notify.txt
+        env:
+          GITHUB_JOB: ${{ github.job }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+
+      - name: Upload artifact - log files
+        if: always() && steps.build.outcome == 'failure'
+        uses: actions/upload-artifact@v5
+        with:
+          name: logs-${{ inputs.version }}-${{ matrix.format }}
+          path: logs/*
+          
+      - name: Upload artifact - docs
+        if: always() && steps.build.outcome == 'success'
+        uses: actions/upload-artifact@v5
+        with:
+          name: python-docs-pt-pt-${{ inputs.version }}-${{ matrix.format }}
+          path: cpython/Doc/build/${{ matrix.format }}
+
+  # Build Python docs in PDF format and make available for download.
+  output-pdf:
+    name: Build docs (pdf)
+    runs-on: ubuntu-latest
+    needs: [ 'build' ]
+    steps:
+      - uses: actions/download-artifact@v6
+        with:
+          name: python-docs-pt-pt-${{ inputs.version }}-latex
+      - run: sudo apt-get update
+      - run: sudo apt-get install -y latexmk texlive-xetex fonts-freefont-otf xindy texlive-lang-portuguese
+      - run: make
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: python-docs-pt-pt-${{ inputs.version }}-pdf
+          path: ./*.pdf
+
+  # Run sphinx-lint to find wrong reST syntax in PO files. Always store logs.
+  # If issues are found, notify telegram and upload logs.
+  lint:
+    name: Lint translations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 5
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ inputs.version }}
+          cache: pip
+          allow-prereleases: true
+
+      - name: Make sure the repository is up to date
+        if: github.event_name != 'pull_request'
+        run: git pull --rebase
+
+      - name: setup
+        run: ./scripts/setup.sh
+
+      - name: Add problem matcher
+        uses: rffontenelle/sphinx-lint-problem-matcher@v1.0.0
+
+      - name: lint translations files
+        id: lint
+        run: ./scripts/lint.sh
+
+      - name: Prepare notification (only on error)
+        if: always() && steps.lint.outcome == 'failure'
+        id: prepare
+        run: |
+          scripts/prepmsg.sh logs/sphinxlint.txt logs/notify.txt
+          cat logs/notify.txt
+        env:
+          GITHUB_JOB: ${{ github.job }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+
+      - name: Upload artifact - log files
+        if: always() && steps.lint.outcome == 'failure'
+        uses: actions/upload-artifact@v5
+        with:
+          name: ${{ inputs.version }}-lint-logs
+          path: logs/*
+
+
+  # Check for zero-width space charcters in translations.
+  # These are known to come together with (some?) machine translation like Google translate,
+  # and - as one of the consequences - it may avoid Transifex glossary matching (e.g. variáveis)
+  zero-width-space:
+    name: Check for zero-width space characters
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: Make sure the repository is up to date
+        if: github.event_name != 'pull_request'
+        run: git pull --rebase
+
+      - name: Remove zero-width space characters
+        run: |
+          sed -i 's/\xe2\x80\x8b//g' *.po **/*.po
+          # Undo removal from where we should not
+          sed -i 's|`````|``​`​``|' reference/lexical_analysis.po
+
+      - name: Show difference (error if there is any)
+        run: |
+          git diff --exit-code --color-words
