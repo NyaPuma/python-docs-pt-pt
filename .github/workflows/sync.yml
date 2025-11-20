@@ -1,68 +1,127 @@
-name: Reusable workflow example
+name: Sync
 
 on:
   workflow_call:
     inputs:
       version:
+        description: "Branch name corresponding to a Python version"
         required: true
         type: string
       tx_project:
+        description: "Name of the Transifex translation project"
         required: true
         type: string
     secrets:
-      TRANSIFEX_APIKEY:
-        required: true
+      TX_TOKEN:
+        description: "Token required for interacting with Transifex API"
+        required: false
+
+env:
+  PYDOC_LANGUAGE: pt_PT
+  PYDOC_TX_PROJECT: ${{ inputs.tx_project }}
+  PYDOC_VERSION: ${{ inputs.version }}
+  TX_CLI_VERSION: '1.6.17'
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    env:
-      LOCALE: pt_PT
-      VERSION: ${{ inputs.version }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Checkout CPython
-        uses: actions/checkout@v4
+
+      # 1- Set up environment
+
+      - name: Check out this repository
+        uses: actions/checkout@v5
+
+      - name: Set language dir variable
+        run:
+          echo "PYDOC_LANG_DIR=${{ env.PYDOC_VERSION }}" >> $GITHUB_ENV
+
+      - name: Checkout this repository ${{ env.PYDOC_VERSION }}
+        uses: actions/checkout@v5
         with:
-          repository: 'python/cpython'
-          ref: ${{env.VERSION}}
-          path: cpython
-      - uses: actions/cache/restore@v4
+          ref: ${{ env.PYDOC_VERSION }}
+          path: ${{ env.PYDOC_LANG_DIR }}
+
+      - uses: actions/setup-python@v6
         with:
-          path: |
-            cpython/Doc/build
-            docs
-          key: cache-${{ inputs.version }}-${{ github.run_id }}
-          restore-keys: cache-${{ inputs.version }}-
-      - name: Checkout Current Branch
-        uses: actions/checkout@v4
-        with:
-          ref: ${{env.VERSION}}
-          path: docs
-          clean: false
-      - name: prepare
-        run: .github/scripts/prepare.sh
-      - name: update
-        run: .github/scripts/update.sh
+          python-version: ${{ inputs.version }}
+          allow-prereleases: true
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      # 2- Install dependencies
+
+      - name: Install Transifex CLI tool
+        run: |
+          cd /usr/local/bin
+          curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash -s -- v$TX_CLI_VERSION
+
+      - name: Install APT dependencies
+        run: sudo apt update -y && sudo apt install gettext -y
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # 3- Pull translations
+
+      - name: Generate updated .tx/config
+        if: ${{ contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event_name) }}
+        run: python scripts/generate_txconfig.py -p ./${{ env.PYDOC_LANG_DIR }} ${{ env.PYDOC_TX_PROJECT }}
         env:
-          TX_TOKEN: ${{ secrets.TRANSIFEX_APIKEY }}
-      - uses: actions/cache/restore@v4
-        with:
-          path: cpython/Doc/build
-          key: cache-${{ inputs.version }}-${{ github.run_id }}
-          restore-keys: cache-${{ inputs.version }}-
-      - name: build
-        run: .github/scripts/build.sh
-      - uses: actions/cache/save@v4
-        with:
-          path: |
-            cpython/Doc/build
-            docs
-          key: cache-${{ inputs.version }}-${{ github.run_id }}
-      - name: stat
-        run: python .github/scripts/tx_stat.py > ./docs/.stat.json
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+
+      - name: Pull translations from Transifex
+        id: pull
+        if: ${{ contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event_name) }}
+        run: |
+          # Clean up obsolete files
+          find ./${{ env.PYDOC_LANG_DIR }} -name '*.po' -exec rm {} \;
+          ./scripts/pull_translations.sh
         env:
-          TX_TOKEN: ${{ secrets.TRANSIFEX_APIKEY }}
-          TX_PROJECT: ${{ inputs.tx_project }}
-      - name: commit
-        run: .github/scripts/commit.sh
+          TX_TOKEN: ${{ secrets.TX_TOKEN }}
+
+      - name: Merge translations from newer branch
+        if: inputs.tx_project != 'python-newest' # python-newest doesn't have a newer branch
+        run: |
+          newer_branch=${PYDOC_VERSION%%.*}.$((${PYDOC_VERSION##*.}+1))
+          git clone --depth 1 --single-branch --branch $newer_branch https://github.com/python/python-docs-pt-pt ${newer_branch}-dir
+          pomerge --from ./${newer_branch}-dir/{**/,}*.po --to ./${{ env.PYDOC_LANG_DIR }}/{**/,}*.po
+          rm -rf ./${newer_branch}-dir
+
+      - name: powrap
+        if: steps.pull.outcome == 'success'
+        run: |
+          cd ./${{ env.PYDOC_LANG_DIR }}
+          powrap *.po **/*.po
+
+      - name: Update statistics
+        if: always()
+        run: |
+          ./scripts/stats.py
+          git -C ./${{ env.PYDOC_LANG_DIR }} diff stats.json
+        env:
+          PYDOC_LANG_DIR: ${{ env.PYDOC_LANG_DIR }}
+
+      - name: Update potodo.md
+        if: always()
+        run: |
+          ./scripts/potodo.sh
+          git -C ./${{ env.PYDOC_LANG_DIR }} diff potodo.md
+        env:
+          PYDOC_LANG_DIR: ${{ env.PYDOC_LANG_DIR }}
+
+      # 4- Commit and push translations
+
+      - name: Commit
+        run: ./scripts/commit.sh
+        env:
+          PYDOC_LANG_DIR: ${{ env.PYDOC_LANG_DIR }}
+
+      - name: Push
+        if: ${{ contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event_name) }}
+        run: |
+          cd ./${{ env.PYDOC_LANG_DIR }}
+          git push
+
+
