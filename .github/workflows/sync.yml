@@ -63,9 +63,12 @@ jobs:
 
       # 2.1 - Garantir permissão de execução aos scripts
       - name: Dar permissão a todos os scripts
-        run: chmod +x ./scripts/*.sh
+        run: chmod +x .github/scripts/*.sh
 
       # 3- Pull translations
+
+      - name: Run prepare.sh
+        run: bash .github/scripts/prepare.sh
 
       - name: Generate updated .tx/config
         if: ${{ contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event_name) }}
@@ -84,7 +87,7 @@ jobs:
           TX_TOKEN: ${{ secrets.TX_TOKEN }}
 
       - name: Merge translations from newer branch
-        if: inputs.tx_project != 'python-newest' # python-newest doesn't have a newer branch
+        if: inputs.tx_project != 'python-newest'
         run: |
           newer_branch=${PYDOC_VERSION%%.*}.$((${PYDOC_VERSION##*.}+1))
           git clone --depth 1 --single-branch --branch $newer_branch https://github.com/python/python-docs-pt-pt ${newer_branch}-dir
