@@ -13,6 +13,13 @@ on:
       - main
       - '3.10'
 
+
+# ESTE BLOCO É A CORREÇÃO PRINCIPAL:
+# Permite que o GITHUB_TOKEN gerado para este workflow tenha permissão de escrita (write)
+# para que o 'git push' dentro do sync.yml seja autorizado.
+permissions:
+  contents: write
+
 jobs:
   sync:
     uses: ./.github/workflows/sync.yml
