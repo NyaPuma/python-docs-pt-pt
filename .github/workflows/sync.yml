@@ -68,7 +68,7 @@ jobs:
       # 3- Pull translations
 
       - name: Run prepare.sh
-        run: bash .github/scripts/prepare.sh
+        run:  bash $GITHUB_WORKSPACE/.github/scripts/prepare.sh
 
       - name: Generate updated .tx/config
         if: ${{ contains(fromJSON('["schedule", "workflow_dispatch"]'), github.event_name) }}
