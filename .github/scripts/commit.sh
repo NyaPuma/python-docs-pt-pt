@@ -1,14 +1,52 @@
-#!/bin/bash
+#!/bin/sh
+# Commit changed files filtering to the git repository
+#
+# SPDX-License-Identifier: CC0-1.0
 
-set -ex
+set -eu
 
-cd docs || exit 1
-git config user.email "github-actions[bot]@users.noreply.github.com"
-git config user.name "github-actions[bot]"
-if ! git status -s|grep '\.po'; then
-  echo "Nothing to commit"
-  exit 0
+test -n ${PYDOC_LANGUAGE+x}
+
+rootdir=$(realpath $(dirname $0)/..)
+language_dir="${PYDOC_LANG_DIR:-$rootdir/cpython/Doc/locales/${PYDOC_LANGUAGE}/LC_MESSAGES}"
+
+cd "$language_dir"
+
+extra_files=".tx/config stats.json potodo.md"
+
+set +u
+if [ -n "${CI+x}" ]; then
+  git config user.email "github-actions[bot]@users.noreply.github.com"
+  git config user.name "github-actions[bot]"
 fi
-git add .
-git commit -m '[po] auto sync'
-git push
+set -u
+
+# Set for removal the deleted obsolete PO files
+git status -s | grep '^ D ' | cut -d' ' -f3 | xargs -r git rm
+
+# Add only updates that do not consist only of the following header lines
+git diff -I'^# Copyright ' -I'^"Project-Id-Version: ' -I'^"POT-Creation-Date: ' -I'^"Language: ' --numstat *.po **/*.po | cut -f3 | xargs -r git add -v
+
+# Add currently untracked PO files, and update other helper files
+untracked_files=$(git ls-files -o --exclude-standard *.po **/*.po)
+if [ -n "${untracked_files+x}" ]; then
+  git add -v $untracked_files
+fi
+
+# Debug in GitHub Actions
+set +u
+if [ -n "${CI+x}" ]; then
+  echo "::group::status"
+  git status
+  echo "::endgroup::"
+  echo "::group::diff"
+  git diff
+  echo "::endgroup::"
+fi
+set -u
+
+# Commit only if there is any cached file
+if ! git diff-index --cached --quiet HEAD; then
+  git add -v $extra_files
+  git commit -vm "$($rootdir/scripts/generate_commit_msg.py)"
+fi
