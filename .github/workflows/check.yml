@@ -67,6 +67,10 @@ jobs:
         if: github.event_name != 'pull_request'
         run: git pull --rebase
 
+        # 2.1 - Garantir permissão de execução aos scripts
+      - name: Dar permissão a todos os scripts
+        run: chmod +x ./scripts/*.sh ./scripts/*.py
+
       - name: setup
         run: ./scripts/setup.sh
 
