@@ -37,26 +37,40 @@ jobs:
           ref: ${{ matrix.version }}
           fetch-depth: 0
 
-      # Debug — mostra a árvore real do repo
+      # Debug: mostrar toda a árvore do repositório
       - name: Debug repository tree
         run: |
           echo "Repository root:"
           pwd
           ls -R .
 
-      # Garantir .github/versions.txt
+      # Diagnóstico definitivo:
+      - name: Inspect manage_versions.py permissions
+        run: |
+          echo "Permissions for manage_versions.py:"
+          ls -l scripts/manage_versions.py || echo "File not found!"
+          echo
+          echo "First 20 lines of file (or error):"
+          head -20 scripts/manage_versions.py || echo "Cannot read file!"
+          echo
+          echo "Attempt to cat file:"
+          cat scripts/manage_versions.py || echo "Cat failed!"
+
+      # Criar .github/versions.txt
       - name: Ensure .github/versions.txt exists and writable
         run: |
           mkdir -p .github
           touch .github/versions.txt
           chmod 666 .github/versions.txt
 
+      # Executar script usando python3 (correto)
       - name: Update versions file
         run: |
           echo "Running manage_versions.py with Python3..."
           python3 scripts/manage_versions.py update_versions_file
 
       - run: curl -O https://raw.githubusercontent.com/python-docs-translations/transifex-automations/master/sample-workflows/transifex-util.py
+
       - run: chmod +x transifex-util.py
 
       - run: ./transifex-util.py recreate_tx_config --language pt_PT --project-slug python-newest --version ${{ matrix.version }}
@@ -80,7 +94,7 @@ jobs:
                      -I'^"Language-Team: ' \
                      -I'^# ' -I'^"Last-Translator: ' \
                      --exit-code \
-            && echo "SIGNIFICANT_CHANGES=1" >> $GITHUB_ENV || exit 0
+              && echo "SIGNIFICANT_CHANGES=1" >> $GITHUB_ENV || exit 0
 
       - run: git add . ':!transifex-util.py'
 
