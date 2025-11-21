@@ -17,7 +17,7 @@ jobs:
         version: [ '3.14', '3.13', '3.12', '3.11', '3.10' ]  # Python versions to run
 
     steps:
-      # Cancel any previously running workflow for the same branch to save resources
+      # Cancel any previously running workflow for the same branch
       - uses: styfle/cancel-workflow-action@main
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: 3
 
-      # Install required dependencies for translations
+      # Install dependencies for translations
       - name: Install Dependencies
         run: |
           sudo apt-get install -y gettext
@@ -41,10 +41,22 @@ jobs:
           ref: ${{ matrix.version }}
           fetch-depth: 0
 
+      # Debug: check that the scripts folder and manage_versions.py exist
+      - name: Check scripts folder
+        run: ls -l python-docs-pt-pt/scripts
+
+      # Ensure manage_versions.py is readable
+      - name: Ensure manage_versions.py is readable
+        run: chmod +r python-docs-pt-pt/scripts/manage_versions.py
+
+      # Update versions file using Python
+      - name: Update versions file
+        run: python python-docs-pt-pt/scripts/manage_versions.py update_versions_file
+
       # Download Transifex helper script
       - run: curl -O https://raw.githubusercontent.com/python-docs-translations/transifex-automations/master/sample-workflows/transifex-util.py
 
-      # Make the downloaded script executable
+      # Make Transifex helper script executable
       - run: chmod +x transifex-util.py
 
       # Recreate Transifex config for the given language and version
@@ -59,10 +71,6 @@ jobs:
 
       # Remove obsolete translation files
       - run: ./transifex-util.py delete_obsolete_files --language pt_PT --project-slug python-newest --version ${{ matrix.version }}
-
-      # Update versions file using Python (fixes permission denied issue)
-      - name: Update versions file
-        run: python scripts/manage_versions.py update_versions_file
 
       # Configure Git for committing changes
       - name: Set up Git
