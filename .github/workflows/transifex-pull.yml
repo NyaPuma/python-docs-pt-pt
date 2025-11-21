@@ -19,8 +19,8 @@ jobs:
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-python@master
-        #with:
-          #python-version: 3
+        with:
+          python-version: 3.10
       - name: Install Dependencies
         run: |
           sudo apt-get install -y gettext
