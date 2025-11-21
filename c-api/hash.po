@@ -1,57 +1,183 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) 2001-2025, Python Software Foundation
+# Copyright (C) 2001 Python Software Foundation
 # This file is distributed under the same license as the Python package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# python-doc bot, 2025
+# André Moreira <afrmscb@gmail.com>, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Python 3.12\n"
+"Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-19 19:40+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2025-11-09 14:13+0000\n"
+"PO-Revision-Date: 2025-09-16 00:00+0000\n"
+"Last-Translator: André Moreira <afrmscb@gmail.com>, 2025\n"
+"Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
+"teams/5390/pt_PT/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_PT\n"
+"Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % "
+"1000000 == 0 ? 1 : 2;\n"
 
-#: c-api/hash.rst:4
 msgid "PyHash API"
-msgstr ""
+msgstr "API do PyHash"
 
-#: c-api/hash.rst:6
-msgid "See also the :c:member:`PyTypeObject.tp_hash` member."
+msgid ""
+"See also the :c:member:`PyTypeObject.tp_hash` member and :ref:`numeric-hash`."
 msgstr ""
+"Veja também o membro :c:member:`PyTypeObject.tp_hash` e :ref:`numeric-hash`."
 
-#: c-api/hash.rst:10
 msgid "Hash value type: signed integer."
-msgstr ""
+msgstr "Tipo de valor do hash: inteiro com sinal."
 
-#: c-api/hash.rst:16
 msgid "Hash value type: unsigned integer."
+msgstr "Tipo de valor do hash: inteiro sem sinal."
+
+msgid ""
+"A numerical value indicating the algorithm for hashing of :class:`str`, :"
+"class:`bytes`, and :class:`memoryview`."
 msgstr ""
 
-#: c-api/hash.rst:23
+msgid "The algorithm name is exposed by :data:`sys.hash_info.algorithm`."
+msgstr ""
+
+msgid ""
+"Numerical values to compare to :c:macro:`Py_HASH_ALGORITHM` to determine "
+"which algorithm is used for hashing. The hash algorithm can be configured "
+"via the configure :option:`--with-hash-algorithm` option."
+msgstr ""
+
+msgid "Add :c:macro:`!Py_HASH_FNV` and :c:macro:`!Py_HASH_SIPHASH24`."
+msgstr ""
+
+msgid "Add :c:macro:`!Py_HASH_SIPHASH13`."
+msgstr ""
+
+msgid ""
+"Buffers of length in range ``[1, Py_HASH_CUTOFF)`` are hashed using DJBX33A "
+"instead of the algorithm described by :c:macro:`Py_HASH_ALGORITHM`."
+msgstr ""
+
+msgid "A :c:macro:`!Py_HASH_CUTOFF` of 0 disables the optimization."
+msgstr ""
+
+msgid ""
+":c:macro:`!Py_HASH_CUTOFF` must be non-negative and less or equal than 7."
+msgstr ""
+
+msgid ""
+"32-bit platforms should use a cutoff smaller than 64-bit platforms because "
+"it is easier to create colliding strings. A cutoff of 7 on 64-bit platforms "
+"and 5 on 32-bit platforms should provide a decent safety margin."
+msgstr ""
+
+msgid "This corresponds to the :data:`sys.hash_info.cutoff` constant."
+msgstr ""
+
+msgid ""
+"The `Mersenne prime <https://en.wikipedia.org/wiki/Mersenne_prime>`_ ``P = "
+"2**n -1``, used for numeric hash scheme."
+msgstr ""
+"O `primo de Mersenne <https://en.wikipedia.org/wiki/Mersenne_prime>`_ ``P = "
+"2**n -1``, usado para o esquema de hash numérico."
+
+msgid "This corresponds to the :data:`sys.hash_info.modulus` constant."
+msgstr ""
+
+msgid "The exponent ``n`` of ``P`` in :c:macro:`PyHASH_MODULUS`."
+msgstr "O expoente ``n`` de ``P`` em :c:macro:`PyHASH_MODULUS`."
+
+msgid "Prime multiplier used in string and various other hashes."
+msgstr "Multiplicador de primo usado em strings e vários outros hashes."
+
+msgid "The hash value returned for a positive infinity."
+msgstr "O valor de hash retornado para um infinito positivo."
+
+msgid "This corresponds to the :data:`sys.hash_info.inf` constant."
+msgstr ""
+
+msgid "The multiplier used for the imaginary part of a complex number."
+msgstr "O multiplicador usado para a parte imaginária de um número complexo."
+
+msgid "This corresponds to the :data:`sys.hash_info.imag` constant."
+msgstr ""
+
 msgid "Hash function definition used by :c:func:`PyHash_GetFuncDef`."
-msgstr ""
+msgstr "Definição de função de hash usada por :c:func:`PyHash_GetFuncDef`."
 
-#: c-api/hash.rst:31
+msgid "Hash function."
+msgstr "Função hash."
+
 msgid "Hash function name (UTF-8 encoded string)."
+msgstr "Nome de função hash (string codificada em UTF-8)."
+
+msgid "This corresponds to the :data:`sys.hash_info.algorithm` constant."
 msgstr ""
 
-#: c-api/hash.rst:35
 msgid "Internal size of the hash value in bits."
+msgstr "Tamanho interno do valor do hash em bits."
+
+msgid "This corresponds to the :data:`sys.hash_info.hash_bits` constant."
 msgstr ""
 
-#: c-api/hash.rst:39
 msgid "Size of seed input in bits."
+msgstr "Tamanho da entrada de seed em bits."
+
+msgid "This corresponds to the :data:`sys.hash_info.seed_bits` constant."
 msgstr ""
 
-#: c-api/hash.rst:46
 msgid "Get the hash function definition."
-msgstr ""
+msgstr "Obtém a definição de função de hash."
 
-#: c-api/hash.rst:49
 msgid ":pep:`456` \"Secure and interchangeable hash algorithm\"."
+msgstr ":pep:`456` \"Algoritmo de hash seguro e intercambiável\"."
+
+msgid ""
+"Hash a pointer value: process the pointer value as an integer (cast it to "
+"``uintptr_t`` internally). The pointer is not dereferenced."
 msgstr ""
+"Hash de um valor de ponteiro: processa o valor do ponteiro como um inteiro "
+"(converte-o para ``uintptr_t`` internamente). O ponteiro não é "
+"desreferenciado."
+
+msgid "The function cannot fail: it cannot return ``-1``."
+msgstr "A função não pode falhar: ela não pode retornar ``-1``."
+
+msgid ""
+"Compute and return the hash value of a buffer of *len* bytes starting at "
+"address *ptr*. The hash is guaranteed to match that of :class:`bytes`, :"
+"class:`memoryview`, and other built-in objects that implement the :ref:"
+"`buffer protocol <bufferobjects>`."
+msgstr ""
+"Calcula e retorna o valor de hash de um buffer de *len* bytes, começando no "
+"endereço *ptr*. O hash tem garantia de corresponder ao de :class:`bytes`, :"
+"class:`memoryview` e outros objetos embutidos que implementam o :ref:"
+"`protocolo de buffer <bufferobjects>`."
+
+msgid ""
+"Use this function to implement hashing for immutable objects whose :c:member:"
+"`~PyTypeObject.tp_richcompare` function compares to another object's buffer."
+msgstr ""
+"Usa esta função para implementar hash para objetos imutáveis cuja função :c:"
+"member:`~PyTypeObject.tp_richcompare` compara ao buffer de outro objeto."
+
+msgid "*len* must be greater than or equal to ``0``."
+msgstr "*len* deve ser maior que ou igual a ``0``."
+
+msgid "This function always succeeds."
+msgstr "Esta função é sempre bem-sucedida."
+
+msgid ""
+"Generic hashing function that is meant to be put into a type object's "
+"``tp_hash`` slot. Its result only depends on the object's identity."
+msgstr ""
+"Função de hash genérica destinada a ser colocada no slot ``tp_hash`` de um "
+"objeto de tipo. O seu resultado depende apenas da identidade do objeto."
+
+msgid "In CPython, it is equivalent to :c:func:`Py_HashPointer`."
+msgstr "No CPython, é equivalente a :c:func:`Py_HashPointer`."
