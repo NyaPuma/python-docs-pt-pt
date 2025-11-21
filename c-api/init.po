@@ -5,16 +5,16 @@
 #
 # Translators:
 # python-doc bot, 2025
-# André Moreira <afrmscb@gmail.com>, 2025
+# NyaPuma <afrmscb@gmail.com>, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-05 14:15+0000\n"
+"POT-Creation-Date: 2025-11-21 14:14+0000\n"
 "PO-Revision-Date: 2025-09-16 00:00+0000\n"
-"Last-Translator: André Moreira <afrmscb@gmail.com>, 2025\n"
+"Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
 "teams/5390/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -3156,6 +3156,25 @@ msgid ""
 msgstr ""
 "Esta função agora sempre programa *func* para ser executada no interpretador "
 "principal."
+
+msgid ""
+"Execute all pending calls. This is usually executed automatically by the "
+"interpreter."
+msgstr ""
+
+msgid ""
+"This function returns ``0`` on success, and returns ``-1`` with an exception "
+"set on failure."
+msgstr ""
+
+msgid ""
+"If this is not called in the main thread of the main interpreter, this "
+"function does nothing and returns ``0``. The caller must hold an :term:"
+"`attached thread state`."
+msgstr ""
+
+msgid "This function only runs pending calls in the main interpreter."
+msgstr ""
 
 msgid "Profiling and Tracing"
 msgstr "Perfilagem e rastreamento"
