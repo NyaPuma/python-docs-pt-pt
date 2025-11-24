@@ -5,16 +5,16 @@
 #
 # Translators:
 # python-doc bot, 2025
-# André Moreira <afrmscb@gmail.com>, 2025
+# NyaPuma <afrmscb@gmail.com>, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-07 14:15+0000\n"
+"POT-Creation-Date: 2025-11-23 14:12+0000\n"
 "PO-Revision-Date: 2025-09-16 00:01+0000\n"
-"Last-Translator: André Moreira <afrmscb@gmail.com>, 2025\n"
+"Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
 "teams/5390/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -7096,21 +7096,13 @@ msgstr ""
 msgid ""
 "There are currently two built-in set types, :class:`set` and :class:"
 "`frozenset`. The :class:`set` type is mutable --- the contents can be "
-"changed using methods like :meth:`~set.add` and :meth:`~set.remove`.  Since "
-"it is mutable, it has no hash value and cannot be used as either a "
-"dictionary key or as an element of another set.  The :class:`frozenset` type "
-"is immutable and :term:`hashable` --- its contents cannot be altered after "
-"it is created; it can therefore be used as a dictionary key or as an element "
-"of another set."
+"changed using methods like :meth:`add <frozenset.add>` and :meth:`remove "
+"<frozenset.add>`. Since it is mutable, it has no hash value and cannot be "
+"used as either a dictionary key or as an element of another set. The :class:"
+"`frozenset` type is immutable and :term:`hashable` --- its contents cannot "
+"be altered after it is created; it can therefore be used as a dictionary key "
+"or as an element of another set."
 msgstr ""
-"Atualmente, existem dois tipos de conjuntos incorporados, :class:`set` e :"
-"class:`frozenset`. O tipo :class:`set` é mutável --- o conteúdo pode ser "
-"alterado usando métodos como :meth:`~set.add` e :meth:`~set.remove`. Uma vez "
-"que é mutável, não tem valor de hash e não pode ser usado como chave de "
-"dicionário ou como elemento de outro conjunto. O tipo :class:`frozenset` é "
-"imutável e :term:`hashable` --- o seu conteúdo não pode ser alterado após a "
-"sua criação; pode, portanto, ser usado como chave de dicionário ou como "
-"elemento de outro conjunto."
 
 msgid ""
 "Non-empty sets (not frozensets) can be created by placing a comma-separated "
