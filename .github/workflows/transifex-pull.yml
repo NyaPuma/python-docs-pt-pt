@@ -48,7 +48,7 @@ jobs:
       # ---------------------------------------------------
       - name: Ensure gettext directory exists for old branches
         run: |
-          cd cpython/Doc
+          cd Doc
           if [ ! -f Makefile ] || ! grep -q "^gettext:" Makefile; then
               echo "Makefile has no gettext rule. Using sphinx-build directly."
               mkdir -p build/gettext
