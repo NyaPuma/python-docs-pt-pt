@@ -1,4 +1,4 @@
-# python-docs-pt-pt
+# python-docs-pt
 
 Olá! Este é o repositório da tradução pt-pt 🇵🇹 da documentação Python.
 
