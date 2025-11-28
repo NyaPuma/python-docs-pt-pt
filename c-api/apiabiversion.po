@@ -5,15 +5,16 @@
 #
 # Translators:
 # python-doc bot, 2025
+# NyaPuma <afrmscb@gmail.com>, 2025
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-25 14:15+0000\n"
+"POT-Creation-Date: 2025-11-27 14:15+0000\n"
 "PO-Revision-Date: 2025-09-16 00:00+0000\n"
-"Last-Translator: python-doc bot, 2025\n"
+"Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
 "teams/5390/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -24,82 +25,100 @@ msgstr ""
 "1000000 == 0 ? 1 : 2;\n"
 
 msgid "API and ABI Versioning"
-msgstr ""
+msgstr "Versões da API e da ABI"
 
 msgid "Build-time version constants"
-msgstr ""
+msgstr "Constantes de versão em tempo de compilação"
 
 msgid ""
 "CPython exposes its version number in the following macros. Note that these "
 "correspond to the version code is **built** with. See :c:var:`Py_Version` "
 "for the version used at **run time**."
 msgstr ""
+"O CPython expõe o número da versão nas seguintes macros. Observe que estas "
+"correspondem ao código da versão com que foi **compilado**. Consulte :c:var:"
+"`Py_Version` para saber a versão utilizada em **tempo de execução**."
 
 msgid ""
 "See :ref:`stable` for a discussion of API and ABI stability across versions."
 msgstr ""
+"Consulte :ref:`stable` para obter uma discussão sobre a estabilidade da API "
+"e da ABI entre versões."
 
 msgid "The ``3`` in ``3.4.1a2``."
-msgstr ""
+msgstr "O ``3`` em ``3.4.1a2``."
 
 msgid "The ``4`` in ``3.4.1a2``."
-msgstr ""
+msgstr "O ``4`` em ``3.4.1a2``."
 
 msgid "The ``1`` in ``3.4.1a2``."
-msgstr ""
+msgstr "O ``1`` em ``3.4.1a2``."
 
 msgid ""
 "The ``a`` in ``3.4.1a2``. This can be ``0xA`` for alpha, ``0xB`` for beta, "
 "``0xC`` for release candidate or ``0xF`` for final."
 msgstr ""
+"O ``a`` em ``3.4.1a2``. Isto pode ser ``0xA`` para alfa, ``0xB`` para beta, "
+"``0xC`` para o candidato a lançamento ou ``0xF`` para final."
 
 msgid "The ``2`` in ``3.4.1a2``. Zero for final releases."
-msgstr ""
+msgstr "O ``2`` em ``3.4.1a2``. Zero para os lançamentos finais."
 
 msgid ""
 "The Python version number encoded in a single integer. See :c:func:"
 "`Py_PACK_FULL_VERSION` for the encoding details."
 msgstr ""
+"O número da versão do Python codificado num único número inteiro. Consulte :"
+"c:func:`Py_PACK_FULL_VERSION` para obter detalhes sobre a codificação."
 
 msgid ""
 "Use this for numeric comparisons, for example, ``#if PY_VERSION_HEX >= ...``."
 msgstr ""
+"Use isto para comparações numéricas, por exemplo, ``#if PY_VERSION_HEX >= ..."
+"``."
 
 msgid "Run-time version"
-msgstr ""
+msgstr "Versão de tempo de execução"
 
 msgid ""
 "The Python runtime version number encoded in a single constant integer. See :"
 "c:func:`Py_PACK_FULL_VERSION` for the encoding details. This contains the "
 "Python version used at run time."
 msgstr ""
+"O número da versão do tempo de execução do Python codificado em um único "
+"inteiro constante. Consulte :c:func:`Py_PACK_FULL_VERSION` para obter "
+"detalhes sobre a codificação. Contém a versão do Python usada no tempo de "
+"execução."
 
 msgid ""
 "Use this for numeric comparisons, for example, ``if (Py_Version >= ...)``."
 msgstr ""
+"Use isto para comparações numéricas, por exemplo, ``if (Py_Version >= ...)``."
 
 msgid "Bit-packing macros"
-msgstr ""
+msgstr "Macros de empacotamento de bits"
 
 msgid ""
 "Return the given version, encoded as a single 32-bit integer with the "
 "following structure:"
 msgstr ""
+"Retorna a versão fornecida, codificada como um único inteiro de 32 bits com "
+"a seguinte estrutura:"
 
 msgid "Argument"
-msgstr ""
+msgstr "Argumento"
 
 msgid "No. of bits"
-msgstr ""
+msgstr "Nº de bits"
 
 msgid "Bit mask"
-msgstr ""
+msgstr "Máscara de bits"
 
 msgid "Bit shift"
-msgstr ""
+msgstr "Deslocamento de bits"
 
 msgid "Example values"
-msgstr ""
+msgstr "Exemplo de valores"
 
 msgid "``3.4.1a2``"
 msgstr "``3.4.1a2``"
@@ -108,7 +127,7 @@ msgid "``3.10.0``"
 msgstr "``3.10.0``"
 
 msgid "*major*"
-msgstr ""
+msgstr "*major*"
 
 msgid "8"
 msgstr "8"
@@ -123,7 +142,7 @@ msgid "``0x03``"
 msgstr "``0x03``"
 
 msgid "*minor*"
-msgstr ""
+msgstr "*minor*"
 
 msgid "``0x00FF0000``"
 msgstr "``0x00FF0000``"
@@ -138,7 +157,7 @@ msgid "``0x0A``"
 msgstr "``0x0A``"
 
 msgid "*micro*"
-msgstr ""
+msgstr "*micro*"
 
 msgid "``0x0000FF00``"
 msgstr "``0x0000FF00``"
@@ -150,7 +169,7 @@ msgid "``0x00``"
 msgstr "``0x00``"
 
 msgid "*release_level*"
-msgstr ""
+msgstr "*release_level*"
 
 msgid "4"
 msgstr "4"
@@ -165,7 +184,7 @@ msgid "``0xF``"
 msgstr "``0xF``"
 
 msgid "*release_serial*"
-msgstr ""
+msgstr "*release_serial*"
 
 msgid "``0x0000000F``"
 msgstr "``0x0000000F``"
@@ -186,10 +205,10 @@ msgid "Version"
 msgstr "Versão"
 
 msgid "``Py_PACK_FULL_VERSION`` arguments"
-msgstr ""
+msgstr "Argumentos de ``Py_PACK_FULL_VERSION``"
 
 msgid "Encoded version"
-msgstr ""
+msgstr "Versão codificada"
 
 msgid "``(3, 4, 1, 0xA, 2)``"
 msgstr "``(3, 4, 1, 0xA, 2)``"
@@ -207,6 +226,8 @@ msgid ""
 "Out-of range bits in the arguments are ignored. That is, the macro can be "
 "defined as:"
 msgstr ""
+"Bits fora do intervalo nos argumentos são ignorados. Ou seja, a macro pode "
+"ser definida como:"
 
 msgid ""
 "#ifndef Py_PACK_FULL_VERSION\n"
@@ -231,9 +252,14 @@ msgid ""
 "``Py_PACK_FULL_VERSION`` is primarily a macro, intended for use in ``#if`` "
 "directives, but it is also available as an exported function."
 msgstr ""
+"``Py_PACK_FULL_VERSION`` é principalmente uma macro, destinada ao uso em "
+"diretivas ``#if``, mas também está disponível como uma função exportada."
 
 msgid ""
 "Equivalent to ``Py_PACK_FULL_VERSION(major, minor, 0, 0, 0)``. The result "
 "does not correspond to any Python release, but is useful in numeric "
 "comparisons."
 msgstr ""
+"Equivalente a ``Py_PACK_FULL_VERSION(major, minor, 0, 0, 0)``. O resultado "
+"não corresponde a nenhuma versão do Python, mas é útil em comparações "
+"numéricas."
