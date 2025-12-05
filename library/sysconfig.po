@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-25 14:15+0000\n"
+"POT-Creation-Date: 2025-12-03 14:17+0000\n"
 "PO-Revision-Date: 2025-09-16 00:01+0000\n"
 "Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
@@ -247,16 +247,16 @@ msgid "``nt_user``"
 msgstr ""
 
 msgid ":file:`{userbase}\\\\Python{XY}`"
-msgstr ""
+msgstr ":file:`{userbase}\\\\Python{XY}`"
 
 msgid ":file:`{userbase}\\\\Python{XY}\\\\site-packages`"
-msgstr ""
+msgstr ":file:`{userbase}\\\\Python{XY}\\\\site-packages`"
 
 msgid ":file:`{userbase}\\\\Python{XY}\\\\Include`"
-msgstr ""
+msgstr ":file:`{userbase}\\\\Python{XY}\\\\Include`"
 
 msgid ":file:`{userbase}\\\\Python{XY}\\\\Scripts`"
-msgstr ""
+msgstr ":file:`{userbase}\\\\Python{XY}\\\\Scripts`"
 
 msgid "``osx_framework_user``"
 msgstr ""
@@ -350,16 +350,16 @@ msgid "``nt``"
 msgstr ""
 
 msgid ":file:`{prefix}\\\\Lib`"
-msgstr ""
+msgstr ":file:`{prefix}\\\\Lib`"
 
 msgid ":file:`{prefix}\\\\Lib\\\\site-packages`"
-msgstr ""
+msgstr ":file:`{prefix}\\\\Lib\\\\site-packages`"
 
 msgid ":file:`{prefix}\\\\Include`"
-msgstr ""
+msgstr ":file:`{prefix}\\\\Include`"
 
 msgid ":file:`{prefix}\\\\Scripts`"
-msgstr ""
+msgstr ":file:`{prefix}\\\\Scripts`"
 
 msgid "Installation path functions"
 msgstr ""

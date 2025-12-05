@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-27 14:15+0000\n"
+"POT-Creation-Date: 2025-12-03 14:17+0000\n"
 "PO-Revision-Date: 2025-09-16 00:01+0000\n"
 "Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
@@ -25,10 +25,10 @@ msgstr ""
 "1000000 == 0 ? 1 : 2;\n"
 
 msgid ":mod:`!struct` --- Interpret bytes as packed binary data"
-msgstr ""
+msgstr ":mod:`!struct` --- Interpretar bytes como dados binários compactados"
 
 msgid "**Source code:** :source:`Lib/struct.py`"
-msgstr ""
+msgstr "**Código-fonte:** :source:`Lib/struct.py`"
 
 msgid ""
 "This module converts between Python values and C structs represented as "
@@ -62,10 +62,10 @@ msgid ""
 msgstr ""
 
 msgid "Functions and Exceptions"
-msgstr ""
+msgstr "Funções e Exceções"
 
 msgid "The module defines the following exception and functions:"
-msgstr ""
+msgstr "O módulo define a seguinte exceção e funções:"
 
 msgid ""
 "Exception raised on various occasions; argument is a string describing what "
@@ -77,6 +77,9 @@ msgid ""
 "to the format string *format*.  The arguments must match the values required "
 "by the format exactly."
 msgstr ""
+"Devolve um objeto bytes contendo os valores *v1*, *v2*, ... compactados de "
+"acordo com a string de formato *format*. Os argumentos devem corresponder "
+"exatamente aos valores exigidos pelo formato."
 
 msgid ""
 "Pack the values *v1*, *v2*, ... according to the format string *format* and "
@@ -108,14 +111,17 @@ msgstr ""
 
 msgid "Each iteration yields a tuple as specified by the format string."
 msgstr ""
+"Cada iteração produz um tuplo conforme especificado pela string de formato."
 
 msgid ""
 "Return the size of the struct (and hence of the bytes object produced by "
 "``pack(format, ...)``) corresponding to the format string *format*."
 msgstr ""
+"Devolve o tamanho da *struct* (e, portanto, do objeto bytes produzido por "
+"``pack(format, ...)``) correspondente à string de formato *format*."
 
 msgid "Format Strings"
-msgstr ""
+msgstr "Strings de Formato"
 
 msgid ""
 "Format strings describe the data layout when packing and unpacking data.  "
@@ -128,7 +134,7 @@ msgid ""
 msgstr ""
 
 msgid "Byte Order, Size, and Alignment"
-msgstr ""
+msgstr "Ordem dos Bytes, Tamanho e Alinhamento"
 
 msgid ""
 "By default, C types are represented in the machine's native format and byte "
@@ -146,49 +152,49 @@ msgid ""
 msgstr ""
 
 msgid "Character"
-msgstr ""
+msgstr "Caractere"
 
 msgid "Byte order"
-msgstr ""
+msgstr "Ordem dos bytes"
 
 msgid "Size"
-msgstr ""
+msgstr "Tamanho"
 
 msgid "Alignment"
-msgstr ""
+msgstr "Alinhamento"
 
 msgid "``@``"
-msgstr ""
+msgstr "``@``"
 
 msgid "native"
-msgstr ""
+msgstr "nativo"
 
 msgid "``=``"
-msgstr ""
+msgstr "``=``"
 
 msgid "standard"
-msgstr ""
+msgstr "padrão"
 
 msgid "none"
-msgstr ""
+msgstr "nenhum"
 
 msgid "``<``"
-msgstr ""
+msgstr "``<``"
 
 msgid "little-endian"
-msgstr ""
+msgstr "little-endian"
 
 msgid "``>``"
-msgstr ""
+msgstr "``>``"
 
 msgid "big-endian"
-msgstr ""
+msgstr "big-endian"
 
 msgid "``!``"
-msgstr ""
+msgstr "``!``"
 
 msgid "network (= big-endian)"
-msgstr ""
+msgstr "rede (= big-endian)"
 
 msgid "If the first character is not one of these, ``'@'`` is assumed."
 msgstr ""
@@ -199,13 +205,13 @@ msgid ""
 msgstr ""
 
 msgid "``03 ff`` in big-endian (``>``)"
-msgstr ""
+msgstr "``03 ff`` em big-endian (``>``)"
 
 msgid "``ff 03`` in little-endian (``<``)"
-msgstr ""
+msgstr "``ff 03`` em little-endian (``<``)"
 
 msgid "Python example:"
-msgstr ""
+msgstr "Exemplo em Python:"
 
 msgid ""
 "Native byte order is big-endian or little-endian, depending on the host "
@@ -240,7 +246,7 @@ msgid ""
 msgstr ""
 
 msgid "Notes:"
-msgstr ""
+msgstr "Notas:"
 
 msgid ""
 "Padding is only automatically added between successive structure members. No "
@@ -251,6 +257,8 @@ msgid ""
 "No padding is added when using non-native size and alignment, e.g. with '<', "
 "'>', '=', and '!'."
 msgstr ""
+"Não é adicionado preenchimento ao usar tamanho e alinhamento não nativos, "
+"por exemplo, com '<', '>', '=' e '!'."
 
 msgid ""
 "To align the end of a structure to the alignment requirement of a particular "
@@ -259,7 +267,7 @@ msgid ""
 msgstr ""
 
 msgid "Format Characters"
-msgstr ""
+msgstr "Caracteres de Formato"
 
 msgid ""
 "Format characters have the following meaning; the conversion between C and "
@@ -271,229 +279,229 @@ msgid ""
 msgstr ""
 
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 msgid "C Type"
-msgstr ""
+msgstr "Tipo C"
 
 msgid "Python type"
-msgstr ""
+msgstr "Tipo Python"
 
 msgid "Standard size"
-msgstr ""
+msgstr "Tamanho padrão"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notas"
 
 msgid "``x``"
-msgstr ""
+msgstr "``x``"
 
 msgid "pad byte"
-msgstr ""
+msgstr "byte de preenchimento"
 
 msgid "no value"
-msgstr ""
+msgstr "sem valor"
 
 msgid "\\(7)"
-msgstr ""
+msgstr "\\(7)"
 
 msgid "``c``"
-msgstr ""
+msgstr "``c``"
 
 msgid ":c:expr:`char`"
-msgstr ""
+msgstr ":c:expr:`char`"
 
 msgid "bytes of length 1"
-msgstr ""
+msgstr "bytes de comprimento 1"
 
 msgid "1"
-msgstr ""
+msgstr "1"
 
 msgid "``b``"
-msgstr ""
+msgstr "``b``"
 
 msgid ":c:expr:`signed char`"
-msgstr ""
+msgstr ":c:expr:`signed char`"
 
 msgid "integer"
-msgstr ""
+msgstr "inteiro"
 
 msgid "\\(1), \\(2)"
-msgstr ""
+msgstr "\\(1), \\(2)"
 
 msgid "``B``"
-msgstr ""
+msgstr "``B``"
 
 msgid ":c:expr:`unsigned char`"
-msgstr ""
+msgstr ":c:expr:`unsigned char`"
 
 msgid "\\(2)"
-msgstr ""
+msgstr "\\(2)"
 
 msgid "``?``"
-msgstr ""
+msgstr "``?``"
 
 msgid ":c:expr:`_Bool`"
-msgstr ""
+msgstr ":c:expr:`_Bool`"
 
 msgid "bool"
-msgstr ""
+msgstr "bool"
 
 msgid "\\(1)"
-msgstr ""
+msgstr "\\(1)"
 
 msgid "``h``"
-msgstr ""
+msgstr "``h``"
 
 msgid ":c:expr:`short`"
-msgstr ""
+msgstr ":c:expr:`short`"
 
 msgid "2"
-msgstr ""
+msgstr "2"
 
 msgid "``H``"
-msgstr ""
+msgstr "``H``"
 
 msgid ":c:expr:`unsigned short`"
-msgstr ""
+msgstr ":c:expr:`unsigned short`"
 
 msgid "``i``"
-msgstr ""
+msgstr "``i``"
 
 msgid ":c:expr:`int`"
-msgstr ""
+msgstr ":c:expr:`int`"
 
 msgid "4"
-msgstr ""
+msgstr "4"
 
 msgid "``I``"
-msgstr ""
+msgstr "``I``"
 
 msgid ":c:expr:`unsigned int`"
-msgstr ""
+msgstr ":c:expr:`unsigned int`"
 
 msgid "``l``"
-msgstr ""
+msgstr "``l``"
 
 msgid ":c:expr:`long`"
-msgstr ""
+msgstr ":c:expr:`long`"
 
 msgid "``L``"
-msgstr ""
+msgstr "``L``"
 
 msgid ":c:expr:`unsigned long`"
-msgstr ""
+msgstr ":c:expr:`unsigned long`"
 
 msgid "``q``"
-msgstr ""
+msgstr "``q``"
 
 msgid ":c:expr:`long long`"
-msgstr ""
+msgstr ":c:expr:`long long`"
 
 msgid "8"
-msgstr ""
+msgstr "8"
 
 msgid "``Q``"
-msgstr ""
+msgstr "``Q``"
 
 msgid ":c:expr:`unsigned long long`"
-msgstr ""
+msgstr ":c:expr:`unsigned long long`"
 
 msgid "``n``"
-msgstr ""
+msgstr "``n``"
 
 msgid ":c:type:`ssize_t`"
-msgstr ""
+msgstr ":c:type:`ssize_t`"
 
 msgid "\\(3)"
-msgstr ""
+msgstr "\\(3)"
 
 msgid "``N``"
-msgstr ""
+msgstr "``N``"
 
 msgid ":c:type:`size_t`"
-msgstr ""
+msgstr ":c:type:`size_t`"
 
 msgid "``e``"
-msgstr ""
+msgstr "``e``"
 
 msgid "\\(6)"
-msgstr ""
+msgstr "\\(6)"
 
 msgid "float"
-msgstr ""
+msgstr "float"
 
 msgid "\\(4)"
-msgstr ""
+msgstr "\\(4)"
 
 msgid "``f``"
-msgstr ""
+msgstr "``f``"
 
 msgid ":c:expr:`float`"
-msgstr ""
+msgstr ":c:expr:`float`"
 
 msgid "``d``"
-msgstr ""
+msgstr "``d``"
 
 msgid ":c:expr:`double`"
-msgstr ""
+msgstr ":c:expr:`double`"
 
 msgid "``F``"
-msgstr ""
+msgstr "``F``"
 
 msgid ":c:expr:`float complex`"
-msgstr ""
+msgstr ":c:expr:`float complex`"
 
 msgid "complex"
-msgstr ""
+msgstr "complexo"
 
 msgid "\\(10)"
-msgstr ""
+msgstr "\\(10)"
 
 msgid "``D``"
-msgstr ""
+msgstr "``D``"
 
 msgid ":c:expr:`double complex`"
-msgstr ""
+msgstr ":c:expr:`double complex`"
 
 msgid "16"
-msgstr ""
+msgstr "16"
 
 msgid "``s``"
-msgstr ""
+msgstr "``s``"
 
 msgid ":c:expr:`char[]`"
-msgstr ""
+msgstr ":c:expr:`char[]`"
 
 msgid "bytes"
-msgstr ""
+msgstr "bytes"
 
 msgid "\\(9)"
-msgstr ""
+msgstr "\\(9)"
 
 msgid "``p``"
-msgstr ""
+msgstr "``p``"
 
 msgid "\\(8)"
-msgstr ""
+msgstr "\\(8)"
 
 msgid "``P``"
-msgstr ""
+msgstr "``P``"
 
 msgid ":c:expr:`void \\*`"
-msgstr ""
+msgstr ":c:expr:`void \\*`"
 
 msgid "\\(5)"
-msgstr ""
+msgstr "\\(5)"
 
 msgid "Added support for the ``'n'`` and ``'N'`` formats."
-msgstr ""
+msgstr "Adicionado suporte para os formatos ``'n'`` e ``'N'``."
 
 msgid "Added support for the ``'e'`` format."
-msgstr ""
+msgstr "Adicionado suporte para o formato ``'e'``."
 
 msgid "Added support for the ``'F'`` and ``'D'`` formats."
-msgstr ""
+msgstr "Adicionado suporte para os formatos ``'F'`` e ``'D'``."
 
 msgid ""
 "The ``'?'`` conversion code corresponds to the :c:expr:`_Bool` type defined "
@@ -508,6 +516,8 @@ msgstr ""
 
 msgid "Added use of the :meth:`~object.__index__` method for non-integers."
 msgstr ""
+"Adicionado o uso do método :meth:`~object.__index__` para valores não "
+"inteiros."
 
 msgid ""
 "The ``'n'`` and ``'N'`` conversion codes are only available for the native "
@@ -543,7 +553,7 @@ msgid ""
 msgstr ""
 
 msgid "When packing, ``'x'`` inserts one NUL byte."
-msgstr ""
+msgstr "Ao compactar, ``'x'`` insere um byte NUL."
 
 msgid ""
 "The ``'p'`` format character encodes a \"Pascal string\", meaning a short "
@@ -557,6 +567,16 @@ msgid ""
 "consumes ``count`` bytes, but that the string returned can never contain "
 "more than 255 bytes."
 msgstr ""
+"O caractere de formato ``'p'`` codifica uma \"string Pascal\", ou seja, uma "
+"string de comprimento variável curta armazenada num *número fixo de bytes*, "
+"dado pela contagem. O primeiro byte armazenado é o comprimento da string, ou "
+"255, o que for menor. Os bytes da string seguem. Se a string passada para :"
+"func:`pack` for demasiado longa (mais longa do que a contagem menos 1), "
+"apenas os primeiros ``count-1`` bytes da string são armazenados. Se a string "
+"for mais curta do que ``count-1``, é preenchida com bytes nulos de forma a "
+"que sejam usados exatamente os bytes contados no total. Note que, para :func:"
+"`unpack`, o caractere de formato ``'p'`` consome ``count`` bytes, mas a "
+"string devolvida nunca pode conter mais do que 255 bytes."
 
 msgid ""
 "For the ``'s'`` format character, the count is interpreted as the length of "
@@ -612,7 +632,7 @@ msgid ""
 msgstr ""
 
 msgid "Examples"
-msgstr ""
+msgstr "Exemplos"
 
 msgid ""
 "Native byte order examples (designated by the ``'@'`` format prefix or lack "
@@ -637,6 +657,7 @@ msgstr ""
 
 msgid "Attempt to pack an integer which is too large for the defined field::"
 msgstr ""
+"Tentativa de compactar um inteiro demasiado grande para o campo definido::"
 
 msgid ""
 ">>> pack(\">h\", 99999)\n"
@@ -702,25 +723,25 @@ msgid ""
 msgstr ""
 
 msgid "Module :mod:`array`"
-msgstr ""
+msgstr "Módulo :mod:`array`"
 
 msgid "Packed binary storage of homogeneous data."
-msgstr ""
+msgstr "Armazenamento binário compactado de dados homogéneos."
 
 msgid "Module :mod:`json`"
-msgstr ""
+msgstr "Módulo :mod:`json`"
 
 msgid "JSON encoder and decoder."
-msgstr ""
+msgstr "Codificador e descodificador JSON."
 
 msgid "Module :mod:`pickle`"
-msgstr ""
+msgstr "Módulo :mod:`pickle`"
 
 msgid "Python object serialization."
-msgstr ""
+msgstr "Serialização de objetos Python."
 
 msgid "Applications"
-msgstr ""
+msgstr "Aplicações"
 
 msgid ""
 "Two main applications for the :mod:`struct` module exist, data interchange "
@@ -732,7 +753,7 @@ msgid ""
 msgstr ""
 
 msgid "Native Formats"
-msgstr ""
+msgstr "Formatos Nativos"
 
 msgid ""
 "When constructing format strings which mimic native layouts, the compiler "
@@ -747,6 +768,8 @@ msgstr ""
 msgid ""
 "Consider these two simple examples (on a 64-bit, little-endian machine)::"
 msgstr ""
+"Considere estes dois exemplos simples (numa máquina de 64 bits, little-"
+"endian)::"
 
 msgid ""
 ">>> calcsize('@lhl')\n"
@@ -760,6 +783,9 @@ msgid ""
 "string without the use of extra padding.  A zero-repeat format code solves "
 "that problem::"
 msgstr ""
+"Os dados não são preenchidos até um limite de 8 bytes no final da segunda "
+"String de Formato sem o uso de preenchimento extra. Um código de formato com "
+"repetição zero resolve esse problema::"
 
 msgid ""
 ">>> calcsize('@llh0l')\n"
@@ -770,14 +796,19 @@ msgid ""
 "The ``'x'`` format code can be used to specify the repeat, but for native "
 "formats it is better to use a zero-repeat format like ``'0l'``."
 msgstr ""
+"O código de formato ``'x'`` pode ser usado para especificar a repetição, mas "
+"para formatos nativos é melhor usar um formato de repetição zero como "
+"``'0l'``."
 
 msgid ""
 "By default, native byte ordering and alignment is used, but it is better to "
 "be explicit and use the ``'@'`` prefix character."
 msgstr ""
+"Por padrão, é utilizada a ordenação e alinhamento de bytes nativos, mas é "
+"melhor ser explícito e usar o caractere de prefixo ``'@'``."
 
 msgid "Standard Formats"
-msgstr ""
+msgstr "Formatos Padrão"
 
 msgid ""
 "When exchanging data beyond your process such as networking or storage, be "
@@ -814,6 +845,9 @@ msgid ""
 "when executed on different machines.  For example, the examples below were "
 "executed on a 32-bit machine::"
 msgstr ""
+"Os resultados acima (executados numa máquina de 64 bits) não são garantidos "
+"para correspondem quando executados em máquinas diferentes. Por exemplo, os "
+"exemplos abaixo foram executados numa máquina de 32 bits::"
 
 msgid ""
 ">>> calcsize('<qqh6x')\n"
@@ -825,10 +859,10 @@ msgid ""
 msgstr ""
 
 msgid "Classes"
-msgstr ""
+msgstr "Classes"
 
 msgid "The :mod:`struct` module also defines the following type:"
-msgstr ""
+msgstr "O módulo :mod:`struct` também define o seguinte tipo:"
 
 msgid ""
 "Return a new Struct object which writes and reads binary data according to "
@@ -844,7 +878,7 @@ msgid ""
 msgstr ""
 
 msgid "Compiled Struct objects support the following methods and attributes:"
-msgstr ""
+msgstr "Objetos Struct compilados suportam os seguintes métodos e atributos:"
 
 msgid ""
 "Identical to the :func:`pack` function, using the compiled format. "
@@ -871,51 +905,54 @@ msgid ""
 msgstr ""
 
 msgid "The format string used to construct this Struct object."
-msgstr ""
+msgstr "A string de formato usada para construir este objeto Struct."
 
 msgid "The format string type is now :class:`str` instead of :class:`bytes`."
 msgstr ""
+"O tipo da string de formato é agora :class:`str` em vez de :class:`bytes`."
 
 msgid ""
 "The calculated size of the struct (and hence of the bytes object produced by "
 "the :meth:`pack` method) corresponding to :attr:`format`."
 msgstr ""
+"O tamanho calculado da *struct* (e, portanto, do objeto bytes produzido pelo "
+"método :meth:`pack`) correspondente a :attr:`format`."
 
 msgid "The *repr()* of structs has changed.  It is now:"
-msgstr ""
+msgstr "A representação *repr()* das *structs* foi alterada. Agora é:"
 
 msgid "C"
-msgstr ""
+msgstr "C"
 
 msgid "structures"
-msgstr ""
+msgstr "estruturas"
 
 msgid "packing"
-msgstr ""
+msgstr "compactação"
 
 msgid "binary"
-msgstr ""
+msgstr "binário"
 
 msgid "data"
-msgstr ""
+msgstr "dados"
 
 msgid "@ (at)"
-msgstr ""
+msgstr "@ (arroba)"
 
 msgid "in struct format strings"
 msgstr ""
 
 msgid "= (equals)"
-msgstr ""
+msgstr "= (igual)"
 
 msgid "< (less)"
-msgstr ""
+msgstr "< (menor)"
 
 msgid "> (greater)"
-msgstr ""
+msgstr "> (maior)"
 
 msgid "! (exclamation)"
-msgstr ""
+msgstr "! (ponto de exclamação)"
 
 msgid "? (question mark)"
-msgstr ""
+msgstr "? (ponto de interrogação)"
