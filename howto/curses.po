@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Python 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-01 14:16+0000\n"
+"POT-Creation-Date: 2025-12-05 14:15+0000\n"
 "PO-Revision-Date: 2025-09-16 00:00+0000\n"
 "Last-Translator: NyaPuma <afrmscb@gmail.com>, 2025\n"
 "Language-Team: Portuguese (Portugal) (https://app.transifex.com/python-doc/"
@@ -468,37 +468,37 @@ msgid "Attribute"
 msgstr ""
 
 msgid ":const:`A_BLINK`"
-msgstr ""
+msgstr ":const:`A_BLINK`"
 
 msgid "Blinking text"
 msgstr ""
 
 msgid ":const:`A_BOLD`"
-msgstr ""
+msgstr ":const:`A_BOLD`"
 
 msgid "Extra bright or bold text"
 msgstr ""
 
 msgid ":const:`A_DIM`"
-msgstr ""
+msgstr ":const:`A_DIM`"
 
 msgid "Half bright text"
 msgstr ""
 
 msgid ":const:`A_REVERSE`"
-msgstr ""
+msgstr ":const:`A_REVERSE`"
 
 msgid "Reverse-video text"
 msgstr ""
 
 msgid ":const:`A_STANDOUT`"
-msgstr ""
+msgstr ":const:`A_STANDOUT`"
 
 msgid "The best highlighting mode available"
 msgstr ""
 
 msgid ":const:`A_UNDERLINE`"
-msgstr ""
+msgstr ":const:`A_UNDERLINE`"
 
 msgid "Underlined text"
 msgstr ""
